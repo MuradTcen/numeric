@@ -13,6 +13,32 @@
     <name>Server</name>
     <description>Project for getting numbers</description>
 
+    <profiles>
+        <profile>
+            <id>Windows</id>
+            <activation>
+                <os>
+                    <family>Windows</family>
+                </os>
+            </activation>
+            <properties>
+                <script.to.execute>${project.basedir}/src/main/scripts/timeout.bat</script.to.execute>
+                <!--Будет ли на windows исполняться, если не указать, что должен выполнять cmd.exe скрипт? -->
+            </properties>
+        </profile>
+        <profile>
+            <id>unix</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                </os>
+            </activation>
+            <properties>
+                <script.to.execute>${project.basedir}/src/main/scripts/sleep.sh</script.to.execute>
+            </properties>
+        </profile>
+    </profiles>
+
     <properties>
         <java.version>1.8</java.version>
         <frontend-src-dir>${project.basedir}/src/main/frontend</frontend-src-dir>
@@ -73,14 +99,13 @@
                 <executions>
                     <execution>
                         <id>sleep</id>
-<!--                        <phase>spring-boot:run</phase>-->
                         <phase>compile</phase>
                         <goals>
                             <goal>exec</goal>
                         </goals>
                         <configuration>
                             <workingDirectory>${project.basedir}</workingDirectory>
-                            <executable>${project.basedir}/src/main/scripts/sleep.sh</executable>
+                            <executable>${script.to.execute}</executable>
                             <arguments>
                                 <argument>10</argument>
                             </arguments>
