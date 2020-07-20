@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/calc")
 @RequiredArgsConstructor
@@ -16,7 +18,7 @@ public class CalcController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
     public int sum() {
-        return calcServiceImpl.calcNumbers().get();
+        return calcServiceImpl.calcNumbers().orElse(0);
     }
 
 }
