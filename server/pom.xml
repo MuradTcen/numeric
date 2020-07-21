@@ -23,7 +23,6 @@
             </activation>
             <properties>
                 <script.to.execute>${project.basedir}/src/main/scripts/timeout.bat</script.to.execute>
-                <!--Будет ли на windows исполняться, если не указать, что должен выполнять cmd.exe скрипт? -->
             </properties>
         </profile>
         <profile>
